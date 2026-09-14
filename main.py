@@ -1,4 +1,5 @@
-"""collection = [] #list
+"""1.
+collection = [] #list
 is_start = True #flag
 
 while (is_start):
@@ -11,9 +12,10 @@ while (is_start):
             collection.append('task')
             print(collection)
         case _:
-            print('Такого пункта нет!')"""
+            print('Такого пункта нет!')
 
-"""import os
+2.
+import os
 import sys
 import platform
 import datetime
@@ -44,6 +46,47 @@ print(f"{os_name} \n"
       f"{os_processor} \n" 
       f"{os_machine} \n" 
       f"{os_python_version} \n" 
-      f"{os_android} \n")"""
+      f"{os_android} \n")
 
-"""Код выводит данные компьютера, такие как его имя, версия оп, время и т.д."""
+Код выводит данные компьютера, такие как его имя, версия оп, время и т.д."""
+
+is_running = True
+collection = [ "task1", "task2" ] # list
+
+def show_collection(task_collection):
+    print("=" * 30)
+    for i, j in enumerate(task_collection):
+        print(i + 1, j)
+    print("=" * 30)
+
+def show_menu():
+    print("1 - посмотреть задачи \n"
+          "2 - добавить задачу \n"
+          "3 - редактировать задау \n"
+          "4 - удалить задачу \n"
+          "5 - выход")
+
+print("Добро пожаловать!")
+while is_running:
+    show_menu()
+    choice_user = input("Введите свой выбор")
+    match str(choice_user):
+        case '1':
+            show_collection(collection)
+        case '2':
+            add_task = input("Введите имя задачи для добавления")
+            collection.append(add_task)
+        case '3':
+            show_collection(collection)
+            select_task = int(input("Введите номер задачи"))
+            edit_task = input("Введите новое имя задачи для редактирования")
+            collection[select_task - 1] = edit_task
+        case '4':
+            show_collection(collection)
+            delete_task = int(input("Введите номер задачи для удаления"))
+            collection.pop(delete_task - 1)
+        case '5':
+            is_running = False
+            print("До свидания!")
+        case _:
+            print("Такого пункта нет!")
