@@ -49,6 +49,8 @@ print(f"{os_name} \n"
       f"{os_android} \n")
 
 Код выводит данные компьютера, такие как его имя, версия оп, время и т.д."""
+import os
+import processes
 
 is_running = True
 collection = [ "task1", "task2" ] # list
@@ -65,6 +67,8 @@ def show_menu():
           "3 - редактировать задачу \n"
           "4 - удалить задачу \n"
           "5 - выход")
+def show_message():
+    input("Нажмите 'ENTER' для продолжения")
 
 print("Добро пожаловать!")
 while is_running:
@@ -73,7 +77,11 @@ while is_running:
     match str(choice_user):
         case '1':
             show_collection(collection)
-            waite = input("Нажмите 'ENTER' для продолжения")
+            show_message()
+            print (f"TM PID {os.getpid()}")
+            print (f"TM PID {os.getppid()}")
+            processes.main()
+
         case '2':
             add_task = input("Введите имя задачи для добавления: ")
             if add_task.startswith(' '):
@@ -84,6 +92,7 @@ while is_running:
                     collection.append(f"Задача {len(collection)}")
             else:
                 collection.append(add_task)
+
         case '3':
             show_collection(collection)
             select_task = input("Введите номер задачи: ")
@@ -96,6 +105,7 @@ while is_running:
                     print("Задачи с таким номером нет в списке!")
             else:
                 print("Введённые данные должны быть номером списка!")
+
         case '4':
             show_collection(collection)
             delete_task = int(input("Введите номер задачи для удаления: "))
@@ -104,8 +114,10 @@ while is_running:
                 print(f"Задача '{delete_task}' успешно удалена!")
             else:
                 print("Задачи с таким номером нет в списке!")
+
         case '5':
             is_running = False
             print("До свидания!")
+
         case _:
             print("Такого пункта нет!")
