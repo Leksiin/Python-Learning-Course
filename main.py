@@ -66,9 +66,40 @@ def show_menu():
           "2 - добавить задачу \n"
           "3 - редактировать задачу \n"
           "4 - удалить задачу \n"
-          "5 - выход")
+          "0 - выход")
+
 def show_message():
     input("Нажмите 'ENTER' для продолжения")
+
+def check_confitm(select_task, task_list):
+    if select_task.isdigit():
+        if (int(select_task) > 0 and int(select_task) <= len(task_list)):
+            return 1
+        else:
+            return 2
+    else:
+        return 3
+
+def delete_task(task_collection):
+    delete_task = input("Введите номер задачи для удаления: ")
+    if check_confitm(delete_task, task_collection) == 1:
+        task_collection.pop(int(delete_task) - 1)
+        print(f"Задача с номером {delete_task} успешно удалена!")
+    elif check_confitm(delete_task, task_collection) == 2:
+        print(f"Задачи с номером {delete_task} нет в списке!")
+    elif check_confitm(delete_task, task_collection) == 3:
+        print(f"Введите именно номер задачи!")
+
+def edit_task(task_collection):
+    select_task = input("Введите номер задачи: ")
+    if check_confitm(select_task, task_collection) == 1:
+        edit_name = input("Введите имя задачи")
+        task_collection[int(select_task) - 1] = edit_name
+        print(f"Задача с номером {edit_name} успешно изменена!")
+    elif check_confitm(select_task, task_collection) == 2:
+        print(f"Задачи с номером {select_task} нет в списке!")
+    elif check_confitm(select_task, task_collection) == 3:
+        print(f"Введите именно номер задачи!")
 
 print("Добро пожаловать!")
 while is_running:
@@ -89,35 +120,22 @@ while is_running:
                     print("Название не может быть пустым!")
                     continue
                 else:
-                    collection.append(f"Задача {len(collection)}")
+                    collection.append(f"Задача {len(collection) + 1}")
             else:
                 collection.append(add_task)
+                print(f"Задача '{add_task}' успешно добавлена!")
 
         case '3':
             show_collection(collection)
-            select_task = input("Введите номер задачи: ")
-            if int(select_task.isdigit()):
-                if int(select_task) > 0 and int(select_task) <= len(collection):
-                    edit_task = input("Введите новое имя задачи для редактирования: ")
-                    collection[int(select_task) - 1] = edit_task
-                    print(f"Задача '{int(select_task)}' : '{edit_task}' успешно отредактирована!")
-                else:
-                    print("Задачи с таким номером нет в списке!")
-            else:
-                print("Введённые данные должны быть номером списка!")
+            edit_task(collection)
 
         case '4':
             show_collection(collection)
-            delete_task = int(input("Введите номер задачи для удаления: "))
-            if int(delete_task) > 0 and delete_task <= len(collection):
-                collection.pop(delete_task - 1)
-                print(f"Задача '{delete_task}' успешно удалена!")
-            else:
-                print("Задачи с таким номером нет в списке!")
+            delete_task(collection)
 
-        case '5':
+        case '0':
             is_running = False
-            print("До свидания!")
+            print("Выход")
 
         case _:
             print("Такого пункта нет!")
