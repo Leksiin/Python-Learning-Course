@@ -1,4 +1,4 @@
-"""Программа для работы с процессами"""
+"""Программа для работы с процессами
 import subprocess
 import os
 import multiprocessing as mp
@@ -30,4 +30,4 @@ def finish():
     print("Finished")
 
 if __name__ == "__main__":
-    main()
+    main()"""
