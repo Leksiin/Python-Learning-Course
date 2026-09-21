@@ -74,32 +74,26 @@ def show_message():
 def check_confitm(select_task, task_list):
     if select_task.isdigit():
         if (int(select_task) > 0 and int(select_task) <= len(task_list)):
-            return 1
+            return True
         else:
-            return 2
+            print(f"Задачи с номером {select_task} нет в списке!")
+            return False
     else:
-        return 3
+        print(f"ведите именно номер задачи!")
+        return False
 
-def delete_task(task_collection):
+def delete_tasks(task_collection):
     delete_task = input("Введите номер задачи для удаления: ")
-    if check_confitm(delete_task, task_collection) == 1:
+    if check_confitm(delete_task, task_collection):
         task_collection.pop(int(delete_task) - 1)
         print(f"Задача с номером {delete_task} успешно удалена!")
-    elif check_confitm(delete_task, task_collection) == 2:
-        print(f"Задачи с номером {delete_task} нет в списке!")
-    elif check_confitm(delete_task, task_collection) == 3:
-        print(f"Введите именно номер задачи!")
 
 def edit_task(task_collection):
     select_task = input("Введите номер задачи: ")
-    if check_confitm(select_task, task_collection) == 1:
+    if check_confitm(select_task, task_collection):
         edit_name = input("Введите имя задачи")
         task_collection[int(select_task) - 1] = edit_name
         print(f"Задача с номером {edit_name} успешно изменена!")
-    elif check_confitm(select_task, task_collection) == 2:
-        print(f"Задачи с номером {select_task} нет в списке!")
-    elif check_confitm(select_task, task_collection) == 3:
-        print(f"Введите именно номер задачи!")
 
 print("Добро пожаловать!")
 while is_running:
@@ -109,9 +103,9 @@ while is_running:
         case '1':
             show_collection(collection)
             show_message()
-            print (f"TM PID {os.getpid()}")
-            print (f"TM PID {os.getppid()}")
-            processes.main()
+            # print (f"TM PID {os.getpid()}")
+            # print (f"TM PID {os.getppid()}")
+            # processes.main()
 
         case '2':
             add_task = input("Введите имя задачи для добавления: ")
