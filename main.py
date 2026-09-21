@@ -53,7 +53,7 @@ import os
 import processes
 
 is_running = True
-collection = [ "task1", "task2" ] # list
+collection = [ ] # list
 
 def show_collection(task_collection):
     print("=" * 30)
@@ -95,41 +95,59 @@ def edit_task(task_collection):
         task_collection[int(select_task) - 1] = edit_name
         print(f"Задача с номером {edit_name} успешно изменена!")
 
-print("Добро пожаловать!")
-while is_running:
-    show_menu()
-    choice_user = input("Введите свой выбор: ")
-    match str(choice_user):
-        case '1':
-            show_collection(collection)
-            show_message()
-            # print (f"TM PID {os.getpid()}")
-            # print (f"TM PID {os.getppid()}")
-            # processes.main()
+def add_tasks(task_collection):
+    add_task = input("Введите имя задачи для добавления: ")
+    if add_task.startswith(' '):
+        if len(add_task) < 2:
+            print("Название не может быть пустым!")
+        else:
+            task_collection.append(f"Задача {len(task_collection) + 1}")
+    else:
+        task_collection.append(add_task)
+        print(f"Задача '{add_task}' успешно добавлена!")
 
-        case '2':
-            add_task = input("Введите имя задачи для добавления: ")
-            if add_task.startswith(' '):
-                if len(add_task) < 2:
-                    print("Название не может быть пустым!")
-                    continue
-                else:
-                    collection.append(f"Задача {len(collection) + 1}")
-            else:
-                collection.append(add_task)
-                print(f"Задача '{add_task}' успешно добавлена!")
+def main():
+    global is_running
+    while is_running:
+        show_menu()
+        choice_user = input("Введите свой выбор: ")
+        task_collection = []
 
-        case '3':
-            show_collection(collection)
-            edit_task(collection)
+        name_file = 'saves.txt'
+        file = open(name_file, 'r', encoding='utf-8')
+        for line in file:
+            task_collection.append(line.strip(' '))
+            print(line)
 
-        case '4':
-            show_collection(collection)
-            delete_task(collection)
+        match str(choice_user):
+            case '1':
+                show_collection(task_collection)
+                show_message()
+                # print (f"TM PID {os.getpid()}")
+                # print (f"TM PID {os.getppid()}")
+                # processes.main()
 
-        case '0':
-            is_running = False
-            print("Выход")
+            case '2':
+                add_tasks(task_collection)
+                name_file = 'saves.txt'
+                file = open(name_file, 'w', encoding='utf-8')
+                for task in task_collection:
+                    file.write(f"{task}\n")
 
-        case _:
-            print("Такого пункта нет!")
+            case '3':
+                show_collection(task_collection)
+                edit_task(task_collection)
+
+            case '4':
+                show_collection(task_collection)
+                delete_tasks(task_collection)
+
+            case '0':
+                is_running = False
+                print("Выход")
+
+            case _:
+                print("Такого пункта нет!")
+
+if __name__ == "__main__":
+    main()
