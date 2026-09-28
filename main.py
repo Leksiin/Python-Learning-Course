@@ -53,12 +53,18 @@ import os
 import processes
 
 is_running = True
-collection = [ ] # list
+name_file = 'saves.txt'
 
 def show_collection(task_collection):
     print("=" * 30)
-    for i, j in enumerate(task_collection):
-        print(i + 1, j)
+    for number, content in enumerate(task_collection):
+        for symbol in content:
+            word = ''
+            if symbol != '|':
+                word = f"{word}{symbol}""
+            else:
+                break
+            print(number + 1, str(content))
     print("=" * 30)
 
 def show_menu():
@@ -97,27 +103,46 @@ def edit_task(task_collection):
 
 def add_tasks(task_collection):
     add_task = input("Введите имя задачи для добавления: ")
-    if add_task.startswith(' '):
-        if len(add_task) < 2:
-            print("Название не может быть пустым!")
-        else:
-            task_collection.append(f"Задача {len(task_collection) + 1}")
-    else:
-        task_collection.append(add_task)
-        print(f"Задача '{add_task}' успешно добавлена!")
 
+    # if add_task.startswith(' '):
+        # if len(add_task) < 2:
+            # print("Название не может быть пустым!")
+        # else:
+            # task_collection.append(f"Задача {len(task_collection) + 1}")
+    # else:
+        # task_collection.append(add_task)
+        # print(f"Задача '{add_task}' успешно добавлена!")
+
+    task_content = input("Введите содержание задачи")
+    if add_task.startswith('') or task_content.startswith(''):
+        if len(task_content) < 2 or len(add_task) < 2:
+            print(f"Имя задачи и содержание не должно быть пустым!")
+            return
+    else:
+        full_name = f"{add_task} | {task_content}"
+        task_collection.append(full_name)
+
+# Загрузка списка задач из файла
+def load_file(task_list, file_name):
+    with open(file_name, 'r', encoding='utf-8') as file:
+        for line in file:
+            task_list.append(line.strip())
+
+# Сохранение списка зада в файл
+def save_file(task_list, file_name):
+    with open(file_name, 'w', encoding='utf-8') as file:
+        for task in task_list:
+            file.writelines(f"{task}\n")
+
+# Главный цикл приложения
 def main():
     global is_running
+    global name_file
     while is_running:
         show_menu()
         choice_user = input("Введите свой выбор: ")
         task_collection = []
-
-        name_file = 'saves.txt'
-        file = open(name_file, 'r', encoding='utf-8')
-        for line in file:
-            task_collection.append(line.strip(' '))
-            print(line)
+        load_file(task_collection, name_file)
 
         match str(choice_user):
             case '1':
@@ -129,10 +154,7 @@ def main():
 
             case '2':
                 add_tasks(task_collection)
-                name_file = 'saves.txt'
-                file = open(name_file, 'w', encoding='utf-8')
-                for task in task_collection:
-                    file.write(f"{task}\n")
+
 
             case '3':
                 show_collection(task_collection)
