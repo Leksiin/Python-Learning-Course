@@ -3,6 +3,8 @@
         Модуль который содержит утилиты
     =======================================
 """
+import sys
+import os
 
 # Функция для проверки подтверждения
 def check_confitm(select_task, task_list):
@@ -13,5 +15,16 @@ def check_confitm(select_task, task_list):
             print(f"Задачи с номером {select_task} нет в списке!")
             return False
     else:
-        print(f"ведите именно номер задачи!")
+        print(f"Введите именно номер задачи!")
         return False
+
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    else:
+        return os.path.dirname(os.path.abspath(__file__))
+
+def insure_saves_file(name_file):
+    if not os.path.exists(name_file):
+        with open(name_file, 'w') as f:
+            f.write("")
