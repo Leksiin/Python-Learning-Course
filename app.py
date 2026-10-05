@@ -8,11 +8,14 @@ from storage import load_file, save_file
 from view import show_collection, show_menu, show_message
 from core import delete_tasks, add_tasks, edit_task
 from config import NAME_FILE_SAVES
+from utils import insure_saves_file
 
 # Главный цикл приложения
-def main():
+def app():
     is_running = True
     name_file = NAME_FILE_SAVES
+    insure_saves_file(name_file)
+    task_collection = load_file([], name_file)
     while is_running:
         show_menu()
         choice_user = input("Введите свой выбор: ")
@@ -28,7 +31,6 @@ def main():
 
             case '2':
                 task_collection = add_tasks(task_collection)
-                add_tasks(task_collection)
                 save_file(task_collection, name_file)
 
             case '3':
