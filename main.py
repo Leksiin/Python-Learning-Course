@@ -88,12 +88,14 @@ v(0.0.8)
 
 v(0.0.9)
 Созданы модули приложения
+
+v(0.1.0)
+Подготовка документации, сборка билда
 """
 
-import os
-import processes
+# import processes
 
-from app import main
+import app
 
 if __name__ == "__main__":
-    main()
+    app.app()
