@@ -34,7 +34,7 @@ def add_tasks(task_collection):
         # task_collection.append(add_task)
         # print(f"Задача '{add_task}' успешно добавлена!")
 
-    task_content = input("Введите содержание задачи")
+    task_content = input("Введите содержание задачи: ")
     if add_task.startswith('') or task_content.startswith(''):
         if len(task_content) < 2 or len(add_task) < 2:
             print(f"Имя задачи и содержание не должно быть пустым!")
