@@ -1,4 +1,4 @@
-import tkinter as tk
+"""import tkinter as tk
 
 numbers = []
 
@@ -57,6 +57,57 @@ input_text.pack(side='left')
 
 result_text = tk.Label(top_frame, text=" ")
 result_text.pack(side='right')
+
+# Запуск
+root.mainloop()"""
+
+import tkinter as tk
+
+numbers = []
+
+# Главный холст
+root = tk.Tk()
+
+root.geometry("500x500")
+root.iconbitmap("../assets/icon.ico")
+
+# Верхняя панель
+top_frame = tk.Frame(root, height=150, bg="midnightblue", padx=10, pady=10)
+top_frame.pack(fill='x', side='top')
+
+# Нижняя панель
+bottom_frame = tk.Frame(root, height=300, bg="midnightblue", padx=10, pady=30)
+bottom_frame.pack(fill='x', side='bottom')
+
+# Левая панель
+left_frame = tk.Frame(root, height=150, bg="midnightblue", padx=10, pady=10)
+left_frame.pack(fill='x', side='left')
+
+# Правая панель
+right_frame = tk.Frame(root, height=150, bg="midnightblue", padx=10, pady=10)
+right_frame.pack(fill='x', side='right')
+
+states = [ ["summ", "+"],
+           ["diff", "-"],
+           ["multiply", "*"],
+           ["divide", "%"],
+           ["double", "."],
+           ["result", "="]
+           ]
+
+row = 0
+col = 0
+
+for btn in range(10):
+    if row == 3:
+        col += 1
+        row = 0
+    b = tk.Button(left_frame, text=btn, command="click1")
+    b.grid(row=col, column=row)
+    row += 1
+
+for state in states:
+    tk.Button(right_frame, text=state[1], command="click2").pack()
 
 # Запуск
 root.mainloop()
