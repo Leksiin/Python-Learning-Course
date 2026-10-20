@@ -30,9 +30,11 @@ label.pack()
 entry = tk.Entry(header)
 entry.pack()
 
-root.mainloop()"""
+root.mainloop()
 
-"""import tkinter as tk
+======================================================
+
+import tkinter as tk
 
 root = tk.Tk()
 
@@ -119,7 +121,9 @@ def gui():
 
 
 gui()
-root.mainloop()"""
+root.mainloop()
+
+======================================================
 
 import tkinter as tk
 
@@ -171,4 +175,17 @@ def create_menu():
 
 main()
 create_menu()
-root.mainloop()
+root.mainloop()"""
+
+import tkinter as tk
+
+class Interface(tk.Tk()):
+    def __init__(self, window_w=400, window_h=400):
+        root = tk.Tk()
+
+        root.geometry(f"{window_w}x{window_h}")
+        root.iconbitmap('../assets/icon.ico')
+
+        root.mainloop()
+
+inteface = Interface(1920, 1080)
