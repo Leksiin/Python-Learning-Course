@@ -195,8 +195,6 @@ class Interface:
 
         self.create_interface()
 
-        self.root.mainloop()
-
     def create_interface(self):
         self.create_frames("menu")
         self.create_buttons()
