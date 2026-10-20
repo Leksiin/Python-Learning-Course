@@ -179,13 +179,37 @@ root.mainloop()"""
 
 import tkinter as tk
 
-class Interface(tk.Tk()):
+class Interface:
     def __init__(self, window_w=400, window_h=400):
-        root = tk.Tk()
+        self.root = tk.Tk()
 
-        root.geometry(f"{window_w}x{window_h}")
-        root.iconbitmap('../assets/icon.ico')
+        self.root_w = window_w
+        self.root_h = window_h
+        self.root.geometry(f"{self.root_w}x{self.root_h}")
+        self.root.iconbitmap('../assets/icon.ico')
 
-        root.mainloop()
+        self.frames = []
+        self.buttons = []
+
+        self.create_interface()
+
+        self.root.mainloop()
+
+    def create_interface(self):
+        self.create_frames("menu")
+        self.create_buttons()
+
+    def create_frames(self, name_frame):
+        frame = tk.Frame(self.root, background="black", width=self.root_w, height=self.root_h)
+        frame.pack_propagate(False)
+        frame.pack()
+        for i in range(len(name_frame)):
+            self.frames[name_frame[i]] = frame
+        print(self.frames)
+
+    def create_buttons(self):
+        button_show_tasks = tk.Button(self.frames["menu"], text="Посмотреть все задачи")
+        button_show_tasks.pack()
+
 
 inteface = Interface(1920, 1080)
