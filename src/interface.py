@@ -178,6 +178,7 @@ create_menu()
 root.mainloop()"""
 
 import tkinter as tk
+from src.ui.Frame import AppFrame
 
 class Interface:
     def __init__(self, window_w=400, window_h=400):
@@ -210,6 +211,3 @@ class Interface:
     def create_buttons(self):
         button_show_tasks = tk.Button(self.frames["menu"], text="Посмотреть все задачи")
         button_show_tasks.pack()
-
-
-inteface = Interface(1920, 1080)
