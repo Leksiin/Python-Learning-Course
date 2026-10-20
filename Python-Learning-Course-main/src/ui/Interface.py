@@ -196,10 +196,11 @@ class Interface:
         self.create_interface()
 
     def create_interface(self):
-        self.create_frames("menu")
+        self.create_frames(["menu", "tasks"])
         self.create_buttons()
 
     def create_frames(self, name_frame):
+        c = ["black", "grey"]
         frame = tk.Frame(self.root, background="black", width=self.root_w, height=self.root_h)
         frame.pack_propagate(False)
         frame.pack()
