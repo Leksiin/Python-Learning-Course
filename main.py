@@ -95,7 +95,12 @@ v(0.1.0)
 
 # import processes
 
-import app
+from src.ui.Interface import Interface
 
 if __name__ == "__main__":
-    app.app()
+    #app.app()
+    i = Interface()
+    f = i.frames['menu']
+    f2 = i.frames['tasks']
+    f.hide(False)
+    f2.hide(False)
