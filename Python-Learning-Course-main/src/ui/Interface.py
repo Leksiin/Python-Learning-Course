@@ -209,5 +209,7 @@ class Interface:
         print(self.frames)
 
     def create_buttons(self):
-        button_show_tasks = tk.Button(self.frames["menu"], text="Посмотреть все задачи")
+        button_show_tasks = AppButton(self.frames["menu"], color="green", text="Посмотреть все задачи", width=20, height=3, command=lambda:self.frames["menu"].hide(True))
+        button_show_tasks = AppButton(self.frames["tasks"], color="blue", text="Назад в меню", width=20,
+                                      height=3, command=lambda: self.frames["tasks"].hide(True))
         button_show_tasks.pack()
