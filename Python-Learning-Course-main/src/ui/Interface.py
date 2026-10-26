@@ -178,6 +178,8 @@ create_menu()
 root.mainloop()"""
 
 import tkinter as tk
+from tkinter import messagebox
+
 from src.ui.Frame import AppFrame
 from src.ui.Button import AppButton
 from src.ui.Listbox import Listbox
@@ -236,3 +238,5 @@ class Interface:
         content.pack()
         author = (tk.Label(show, text=f"{author}"))
         author.pack()
+        messagebox.showinfo("Заметка")
+        messagebox.askyesno("Вы действительно хотите выйти?", self.root.quit())
