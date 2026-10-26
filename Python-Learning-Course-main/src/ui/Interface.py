@@ -192,6 +192,7 @@ class Interface:
 
         self.frames = []
         self.buttons = []
+        self.list_task = tk.Listbox()
 
         self.create_interface()
 
@@ -225,3 +226,12 @@ class Interface:
         elif flag and name_frame == "tasks":
             self.frames["tasks"].hide(True)
             self.frames["menu"].hide(False)
+
+    def create_top(self, name, content, author):
+        show = tk.Toplevel(self.root)
+        name = (tk.Label(show, text=f"{name}"))
+        name.pack()
+        content = (tk.Label(show, text=f"{content}"))
+        content.pack()
+        author = (tk.Label(show, text=f"{author}"))
+        author.pack()
