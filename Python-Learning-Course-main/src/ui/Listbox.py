@@ -9,3 +9,5 @@ class Listbox(tk.Listbox):
     def add_to_list(self, content):
         self.insert(tk.END, content)
 
+    def delete_list(self):
+        self.delete(0, tk.END)
