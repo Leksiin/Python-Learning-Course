@@ -22,7 +22,7 @@ def show_all_tasks():
 def show_details(event=None):
     cur_task = ui.list_task.curselection()
     task = collection[cur_task[0]]
-    print(task)
+    ui.create_top(task["name"], task["content"], task["author"])
 
 
 
